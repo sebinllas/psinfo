@@ -60,16 +60,16 @@ char *get_word(char *words, int n, char s)
     if (count == n)
     {
       mem_add = mem_add + 1;
-      word_add = mem_add;
       break;
     }
     mem_add = mem_add + 1;
   }
-  char *word = calloc((int)(addres_of_char(word_add, ' ') - word_add) + 1, 1);
-  while ((*mem_add != s) & (*mem_add != '\0'))
+  word_add = mem_add;
+  int word_lenght = addres_of_char(word_add, s) - word_add;
+  char *word = calloc(word_lenght + 1, 1);
+  for (int i = 0; i < word_lenght; i++)
   {
-    append_char(word, *mem_add);
-    mem_add++;
+    *((char *)(word + i)) = *((char *)(mem_add + i));
   }
 
   return word;
@@ -81,11 +81,9 @@ void append_str(char *dest, char *src)
   char *mem_add = src;
   int size = sizeof *mem_add;
   char *dest_add = addres_of_char(dest, '\0');
-
-  do
+  int src_lenght = len_str(src);
+  for (int i = 0; i < src_lenght; i++)
   {
-    *dest_add = *mem_add;
-    mem_add += size;
-    dest_add += size;
-  } while (*mem_add != '\0');
+    *((char *)dest_add + i * size) = *((char *)mem_add + i * size);
+  }
 }
