@@ -87,3 +87,42 @@ void append_str(char *dest, char *src)
     *((char *)dest_add + i * size) = *((char *)mem_add + i * size);
   }
 }
+
+// Mostrar información relacionada a un solo proceso
+char* show_description_only_process(char *buf)
+{
+  char *info = calloc(300, 1);
+  append_str(info, get_word(buf, 0, '\n'));
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 2, '\n'));
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 17, '\n'));
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 27, '\n'));
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 26, '\n'));
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 28, '\n'));
+  append_str(info, "\n");
+  append_str(info, "context switches:");
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 54, '\n'));
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 55, '\n'));
+  append_str(info, "\n");
+
+  return info;  
+}
+
+char* show_description_many_process(char *buf, char* pid)
+{
+  char *info = calloc(300, 1);
+  append_str(info, "pid: ");
+  append_str(info, pid);
+  append_str(info, "\n");
+  append_str(info, get_word(buf, 0, '\n'));
+  append_str(info, "\n");
+  append_str(info, "-----------\n");
+
+  return info;  
+}
