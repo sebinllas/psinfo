@@ -1,7 +1,8 @@
+#include <stdio.h>
 // quiar esta implementacion, esta definida en str.c
 
 /* cargar contenido del archivo */
-char* load_content_file(char* pid)
+char *load_content_file(char *pid)
 {
     char *path = calloc(14 + len_str(pid) + 1, 1);
     append_str(path, "/proc/");
@@ -21,13 +22,38 @@ char* load_content_file(char* pid)
     fread(buf, 1500, 1, fp);
 
     return buf;
-} 
+}
 
-void print_list(int pc, char *pid[])
+char *list_info(int pc, char *pid[])
 {
-    for(int i=2; i<pc; i++)
+    char *info = calloc(pc * 40, 1);
+    char *buf;
+    for (int i = 2; i < pc; i++)
     {
-        char *buf = load_content_file(pid[i]);
-        printf("%s", show_description_many_process(buf, pid[i]));
+        buf = load_content_file(pid[i]);
+        append_str(info, show_description_many_process(buf, pid[i]));
     }
+    return info;
+}
+void write_file(int pc, char *pid[])
+{
+    char *proc = list_info(pc, pid);
+    char *file_name = calloc(pc * 6 + 23, 1);
+    append_str(file_name, "./psinfo-report");
+    for (int i = 2; i < pc; i++)
+    {
+        append_str(file_name, "-");
+        append_str(file_name, pid[i]);
+    }
+    append_str(file_name, ".info");
+    FILE *fptr;
+    fptr = fopen(file_name, "w");
+
+    if (fptr == NULL)
+    {
+        printf("Error!");
+        exit(1);
+    }
+    fprintf(fptr, "%s", proc);
+    fclose(fptr);
 }

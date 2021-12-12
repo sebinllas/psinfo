@@ -21,11 +21,11 @@ int main(int argc, char *argv[])
 		{
 			if ((argv[1][1] == 'l'))
 			{
-				print_list(argc, argv);
+				printf("%s", list_info(argc, argv));
 			}
-			else if(argv[1][1] == 'r'){
-				fputs("you must give PID or a list of PIDs\n", stderr);
-				exit(1);
+			else if (argv[1][1] == 'r')
+			{
+				write_file(argc, argv);
 			}
 			else if (argv[1][1] == 'h')
 			{
@@ -38,7 +38,9 @@ int main(int argc, char *argv[])
 				exit(0);
 			}
 		}
-	}else{
+	}
+	else
+	{
 		// Mostrar información de un solo proceso (CASO 1)
 		char *buf = load_content_file(argv[1]);
 		printf("%s", show_description_only_process(buf));
