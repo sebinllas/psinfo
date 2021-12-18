@@ -1,3 +1,4 @@
+
 /*given one string (s) and two chars (c and rep) replace all the occurrences of c in s by rep*/
 void replace_str(char *s, char c, char rep)
 {
@@ -88,9 +89,33 @@ void append_str(char *dest, char *src)
   }
 }
 
-// Mostrar información relacionada a un solo proceso
-char* show_description_only_process(char *buf)
+int compare_str(char *s1, char *s2)
 {
+  int len_s1 = len_str(s1);
+  int len_s2 = len_str(s2);
+  if (len_s1 != len_s2)
+  {
+    return 0;
+  }
+  for (int i = 0; i < len_s1; i++)
+  {
+    if (s1[i] != s2[i])
+    {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+// Mostrar información relacionada a un solo proceso
+char *show_description_only_process(char *buf)
+{
+
+  if (compare_str("non-exitent", get_word(get_word(buf, 0, '\n'), 0, ' ')))
+  {
+    append_str(buf, "\n");
+    return buf;
+  }
   char *info = calloc(300, 1);
   append_str(info, get_word(buf, 0, '\n'));
   append_str(info, "\n");
@@ -111,10 +136,10 @@ char* show_description_only_process(char *buf)
   append_str(info, get_word(buf, 55, '\n'));
   append_str(info, "\n");
 
-  return info;  
+  return info;
 }
 
-char* show_description_many_process(char *buf, char* pid)
+char *show_description_many_process(char *buf, char *pid)
 {
   char *info = calloc(300, 1);
   append_str(info, "pid: ");
@@ -124,5 +149,5 @@ char* show_description_many_process(char *buf, char* pid)
   append_str(info, "\n");
   append_str(info, "-----------\n");
 
-  return info;  
+  return info;
 }

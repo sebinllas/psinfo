@@ -11,14 +11,14 @@ char *load_content_file(char *pid)
 
     FILE *fp;
     fp = fopen(path, "r");
+    char *buf = calloc(1500, 1);
     if (fp == NULL)
     {
-        fputs("File error or non-existent process\n", stderr);
-        exit(1);
-    }
+        append_str(buf, "non-exitent process with id: ");
+        append_str(buf, pid);
 
-    char *buf = calloc(1500, 1);
-    //fgets(buf, 1500, fp);
+        return buf;
+    }
     fread(buf, 1500, 1, fp);
 
     return buf;
@@ -30,6 +30,12 @@ char *list_info(int pc, char *pid[])
     char *buf;
     for (int i = 2; i < pc; i++)
     {
+        if (atoi(pid[i]) == 0)
+        {
+            append_str(info, "Process id ");
+            append_str(info, pid[i]);
+            append_str(info, "not have a correct format \n ----------- \n");
+        }
         buf = load_content_file(pid[i]);
         append_str(info, show_description_many_process(buf, pid[i]));
     }
