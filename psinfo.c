@@ -5,16 +5,13 @@
 #include "str.c"
 #include "adminFile.c"
 
-// enum ERROR_CODES
-// {
-// 	BAD_ARGUMENT = 400,
-// 	PROC_NOT_FOUND = 404,
-// 	BAD_FLAG = 401,
-// };
-//main function
+//Flujo principal
 int main(int argc, char *argv[])
 {
 
+	/* 
+	validación de número de parametros para indentificar la operación que se quiere realizar
+	*/
 	if (argc == 2)
 	{
 		if (atoi(argv[1]) == 0)
@@ -47,41 +44,5 @@ int main(int argc, char *argv[])
 			exit(BAD_FLAG);
 		}
 	}
-
-	// if (argc > 2)
-	// {
-	// 	if (argv[1][0] == '-')
-	// 	{
-	// 		if ((argv[1][1] == 'l'))
-	// 		{
-	// 			printf("%s", list_info(argc, argv));
-	// 		}
-	// 		else if (argv[1][1] == 'r')
-	// 		{
-	// 			write_file(argc, argv);
-	// 		}
-	// 		// else if (argv[1][1] == 'h')
-	// 		// {
-	// 		// 	printf("Ayuda para el comando\n");
-	// 		// 	exit(0);
-	// 		// }
-	// 		else
-	// 		{
-	// 			printf("invalid option -- %c\n", argv[1][1]);
-	// 			printf("you can use -l for list mode or -r for report mode \n");
-	// 			fprintf(stderr, "Error:%d\n", BAD_ARGUMENT);
-	// 			exit(2);
-	// 		}
-	// 	}
-	// }
-
-	// if(argc == 2)
-	// {
-
-	// 	// Mostrar información de un solo proceso (CASO 1)
-	// 	char *buf = load_content_file(argv[1]);
-	// 	printf("%s", show_description_only_process(buf));
-	// }
-
 	return 0;
 }

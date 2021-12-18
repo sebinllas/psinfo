@@ -1,5 +1,5 @@
 
-/*given one string (s) and two chars (c and rep) replace all the occurrences of c in s by rep*/
+/*dado un string (S) y 2 chars (c y rep) reemplaza todas las occuerencia de c en s por rep*/
 void replace_str(char *s, char c, char rep)
 {
   char *mem_add = s;
@@ -16,7 +16,7 @@ void replace_str(char *s, char c, char rep)
   }
 }
 
-/* return a pointer to the first occurrence of c in s*/
+/* retorna un puntero a la posisción de la primera ocurrencia de c en s*/
 char *addres_of_char(char *s, char c)
 {
   char *mem_add = s;
@@ -27,13 +27,13 @@ char *addres_of_char(char *s, char c)
   return mem_add;
 }
 
-/* return the lenght of a given string*/
+/* retorna el tamaño de un string dado*/
 int len_str(char *c)
 {
   return addres_of_char(c, '\0') - c;
 }
 
-//append a char to a string
+//concatena un char a un string
 void append_char(char *dest, char src)
 {
   char *dest_add = addres_of_char(dest, '\0');
@@ -41,7 +41,7 @@ void append_char(char *dest, char src)
   *(dest_add + 1) = '\0';
 }
 
-//given a string with a lists of words separeted by s return a copy of the word on position n
+//dado un string con uns lista de palabras separadas por el char s retorna la palabra el la posisción n
 char *get_word(char *words, int n, char s)
 {
   int size = len_str(words);
@@ -76,7 +76,7 @@ char *get_word(char *words, int n, char s)
   return word;
 }
 
-//append one string to another
+//concatena un string a otro
 void append_str(char *dest, char *src)
 {
   char *mem_add = src;
@@ -107,21 +107,15 @@ int compare_str(char *s1, char *s2)
   return 1;
 }
 
-// Mostrar información relacionada a un solo proceso
+// Mostrar información completa relacionada a un solo proceso
 char *show_description_only_process(char *buf)
 {
-
   if (compare_str("Error", get_word(get_word(buf, 0, ':'), 0, ' ')))
   {
-
     append_str(buf, "\n");
-
-    // append_str(buf, "Error: ");
     append_str(buf, "Please enter a code for an existing process. \nYou can use the ps command to find out the current processes.\n");
-
     return buf;
   }
-
   char *info = calloc(300, 1);
   append_str(info, get_word(buf, 0, '\n'));
   append_str(info, "\n");
@@ -145,6 +139,7 @@ char *show_description_only_process(char *buf)
   return info;
 }
 
+//mostrar información abreviada de un solo proceso
 char *show_description_many_process(char *buf, char *pid)
 {
   char *info = calloc(300, 1);

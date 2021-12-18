@@ -1,7 +1,7 @@
 #include <stdio.h>
 // quiar esta implementacion, esta definida en str.c
 
-/* cargar contenido del archivo */
+/* cargar en memoria contenido del archivo relacionado a un proceso*/
 char *load_content_file(char *pid)
 {
     char *path = calloc(14 + len_str(pid) + 1, 1);
@@ -18,7 +18,6 @@ char *load_content_file(char *pid)
         sprintf(error, "%d", PROC_NOT_FOUND);
         append_str(buf, "Error: ");
         append_str(buf, error);
-        //append_str(buf, " \n ");
         append_str(buf, " non-exitent process with id ");
         append_str(buf, pid);
 
@@ -29,6 +28,7 @@ char *load_content_file(char *pid)
     return buf;
 }
 
+// cargar en memoria información resumida de varios procesos a partir de sus PIDs
 char *list_info(int pc, char *pid[])
 {
     char *info = calloc(pc * 40, 1);
@@ -53,6 +53,9 @@ char *list_info(int pc, char *pid[])
     }
     return info;
 }
+
+/* crea un archivo .info con la información de los procesos 
+cuyo nombre corresponde a los PIDs separados por guiones*/
 void write_file(int pc, char *pid[])
 {
     char *proc = list_info(pc, pid);
