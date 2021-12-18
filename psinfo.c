@@ -1,15 +1,16 @@
+#include "errors.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "str.c"
 #include "adminFile.c"
 
-enum ERROR_CODES
-{
-	BAD_ARGUMENT = 400,
-	PROC_NOT_FOUND = 404,
-	BAD_FLAG = 401,
-};
+// enum ERROR_CODES
+// {
+// 	BAD_ARGUMENT = 400,
+// 	PROC_NOT_FOUND = 404,
+// 	BAD_FLAG = 401,
+// };
 //main function
 int main(int argc, char *argv[])
 {

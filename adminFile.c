@@ -14,7 +14,12 @@ char *load_content_file(char *pid)
     char *buf = calloc(1500, 1);
     if (fp == NULL)
     {
-        append_str(buf, "non-exitent process with id: ");
+        char error[4];
+        sprintf(error, "%d", PROC_NOT_FOUND);
+        append_str(buf, "Error: ");
+        append_str(buf, error);
+        //append_str(buf, " \n ");
+        append_str(buf, " non-exitent process with id ");
         append_str(buf, pid);
 
         return buf;
@@ -32,12 +37,19 @@ char *list_info(int pc, char *pid[])
     {
         if (atoi(pid[i]) == 0)
         {
-            append_str(info, "Process id ");
+            char error[4];
+            sprintf(error, "%d", BAD_ARGUMENT);
+            append_str(info, "Error: ");
+            append_str(info, error);
+            append_str(info, "\nProcess id ");
             append_str(info, pid[i]);
-            append_str(info, "not have a correct format \n ----------- \n");
+            append_str(info, " not have a correct format \n----------- \n");
         }
-        buf = load_content_file(pid[i]);
-        append_str(info, show_description_many_process(buf, pid[i]));
+        else
+        {
+            buf = load_content_file(pid[i]);
+            append_str(info, show_description_many_process(buf, pid[i]));
+        }
     }
     return info;
 }

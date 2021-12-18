@@ -111,11 +111,17 @@ int compare_str(char *s1, char *s2)
 char *show_description_only_process(char *buf)
 {
 
-  if (compare_str("non-exitent", get_word(get_word(buf, 0, '\n'), 0, ' ')))
+  if (compare_str("Error", get_word(get_word(buf, 0, ':'), 0, ' ')))
   {
+
     append_str(buf, "\n");
+
+    // append_str(buf, "Error: ");
+    append_str(buf, "Please enter a code for an existing process. \nYou can use the ps command to find out the current processes.\n");
+
     return buf;
   }
+
   char *info = calloc(300, 1);
   append_str(info, get_word(buf, 0, '\n'));
   append_str(info, "\n");

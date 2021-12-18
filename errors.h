@@ -1,0 +1,6 @@
+enum ERROR_CODES
+{
+  BAD_ARGUMENT = 400,
+  PROC_NOT_FOUND = 404,
+  BAD_FLAG = 401,
+};
